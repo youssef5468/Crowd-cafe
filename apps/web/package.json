@@ -1,5 +1,5 @@
 {
-  "name": "@galal/web",
+  "name": "@crowd/web",
   "private": true,
   "type": "module",
   "version": "1.0.0",
@@ -16,7 +16,7 @@
     "@fontsource/lalezar": "^5.3.0",
     "@fontsource/londrina-solid": "^5.3.0",
     "@fontsource/tajawal": "^5.2.7",
-    "@galal/shared": "*",
+    "@crowd/shared": "*",
     "@hookform/resolvers": "^5.2.2",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-dialog": "^1.1.15",

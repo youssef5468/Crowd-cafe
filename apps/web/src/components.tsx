@@ -13,7 +13,7 @@ import {
   Check,
   Trash,
 } from '@phosphor-icons/react';
-import { type MenuItem } from '@galal/shared';
+import { type MenuItem } from '@crowd/shared';
 import { useCafe } from './context';
 import { useCart, useUI, text, unitPrice } from './lib';
 import { theme } from './theme.config';

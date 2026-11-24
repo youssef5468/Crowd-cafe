@@ -9,7 +9,7 @@
 - **الافتراضي:** `npm run dev` بيشغّل Crowd على طول. مفيش `dev:crowd` ولا متغيرات.
 - **بورتات تانية:** الموقع 5184 (بدل 5183)، والـ API 4011 (بدل 4010)، وPostgres 54340 (بدل 54339). فتقدر تشغّل جلال وCrowd مع بعض.
 - **قاعدة بيانات واسم تانيين:** `crowd` و`crowd_utf8` ومالك `owner@crowd.local`، وفولدر `.local` جوه المشروع نفسه.
-- **مفاتيح التخزين في المتصفح:** كل حاجة `crowd-...` (اللغة، الثيم، السلة، الطاولة، شاشة التحميل، كاش الـ service worker) بدل `galal-...`.
+- **مفاتيح التخزين في المتصفح:** كل حاجة `crowd-...` (اللغة، الثيم، السلة، الطاولة، شاشة التحميل، كاش الـ service worker) بدل `crowd-...`.
 - **اتشال كل اللي بتاع جلال:** الـ skin والصور واللعبة وصفحة الهيرو القديمة. الـ HTML الأساسي (العنوان وشاشة التحميل والـ manifest) كله Crowd.
 - فحصت 14 صفحة بالعربي والإنجليزي: مفيش أي نص أو عنوان أو meta فيه اسم جلال.
 
@@ -20,7 +20,7 @@
 ```
 npm ci
 npm run db:generate
-npm run build -w @galal/shared
+npm run build -w @crowd/shared
 npm run db:local      # terminal لوحده
 npm run db:deploy     # terminal تاني
 npm run db:seed       # منيو Crowd الابتدائي
@@ -35,7 +35,7 @@ npm run dev
 - **حقوق:** الصور واللوجو من حساب Crowd، فاتأكد من موافقة صاحبه قبل النشر العام.
 
 ## اللي لسه فيه اسم جلال (داخلي ومش بيظهر للزبون)
-أسماء الحزم `@galal/*`، وهيدر `X-Galal-CSRF` بين الموقع والـ API، ونصوص جلال الافتراضية جوه `i18n.ts` (بتتغطى بنصوص Crowd)، وكتالوج جلال المرجعي في `packages/shared` (متاح بـ `SEED_BRAND=galal`). تقدر تغيّرهم بـ find/replace لو حابب، بس مش ضروري.
+أسماء الحزم `@crowd/*`، وهيدر `X-crowd-CSRF` بين الموقع والـ API، ونصوص جلال الافتراضية جوه `i18n.ts` (بتتغطى بنصوص Crowd)، وكتالوج جلال المرجعي في `packages/shared` (متاح بـ `SEED_BRAND=crowd`). تقدر تغيّرهم بـ find/replace لو حابب، بس مش ضروري.
 
 ## اتفحص
 `tsc` للـ web والـ api، و`eslint`، و`vite build`، و55 اختبار وحدة، ومتصفح حقيقي بـ API وهمي. **ما اتفحصش:** الـ API والـ migration على Postgres حقيقي (الـ sandbox ما بيوصلش لسيرفر Prisma)، ففي `tests/table-orders.api.test.ts` و`tests/api.test.ts` اختبارات تكامل شغّلها بـ `npm test` بعد `db:local`. وما اتنقلتش اختبارات الـ e2e (كانت مكتوبة لجلال).

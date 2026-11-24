@@ -38,7 +38,7 @@ import {
   reservationStatusSchema,
   cairoDate,
   type OrderStatus,
-} from '@galal/shared';
+} from '@crowd/shared';
 import { db } from './db.js';
 import { newPickupCode } from './pickup-code.js';
 import { uploadsDirectory, webDirectory } from './config.js';
@@ -80,7 +80,7 @@ const wrap =
     Promise.resolve(fn(req, res, next)).catch(next);
   };
 const requireAuth = wrap(async (req, _res, next) => {
-  const payload = readToken(req.cookies.galal_access_token, 'access');
+  const payload = readToken(req.cookies.crowd_access_token, 'access');
   if (!payload) throw new ApiError(401, 'Please sign in');
   const user = await db.user.findUnique({ where: { id: payload.sub } });
   if (!user || user.sessionVersion !== payload.version) throw new ApiError(401, 'Session expired');
@@ -111,7 +111,7 @@ function readToken(token: unknown, type: Identity['type']): Identity | null {
 function setCookies(res: Response, user: { id: string; sessionVersion: number }) {
   for (const type of ['access', 'refresh'] as const)
     res.cookie(
-      `galal_${type}_token`,
+      `crowd_${type}_token`,
       jwt.sign({ sub: user.id, version: user.sessionVersion, type }, jwtSecret, {
         expiresIn: type === 'access' ? '15m' : '7d',
       }),
@@ -208,10 +208,10 @@ app.use('/api', (req, _res, next) => {
     if (!origin && referrerOrigin && !origins.includes(referrerOrigin))
       return next(new ApiError(403, 'Origin not allowed'));
     if (
-      (req.cookies.galal_access_token || req.cookies.galal_refresh_token) &&
+      (req.cookies.crowd_access_token || req.cookies.crowd_refresh_token) &&
       !origin &&
       !referrerOrigin &&
-      req.get('X-Galal-CSRF') !== '1'
+      req.get('X-crowd-CSRF') !== '1'
     )
       return next(new ApiError(403, 'Missing request origin or CSRF header'));
   }
@@ -325,7 +325,7 @@ api.post(
   '/auth/refresh',
   authLimiter,
   wrap(async (req, res) => {
-    const payload = readToken(req.cookies.galal_refresh_token, 'refresh');
+    const payload = readToken(req.cookies.crowd_refresh_token, 'refresh');
     if (!payload) throw new ApiError(401, 'Please sign in again');
     const user = await db.user.findUnique({ where: { id: payload.sub } });
     if (!user || user.sessionVersion !== payload.version)
@@ -337,13 +337,13 @@ api.post(
 api.post(
   '/auth/logout',
   wrap(async (req, res) => {
-    const payload = readToken(req.cookies.galal_refresh_token, 'refresh');
+    const payload = readToken(req.cookies.crowd_refresh_token, 'refresh');
     if (payload)
       await db.user.updateMany({
         where: { id: payload.sub, sessionVersion: payload.version },
         data: { sessionVersion: { increment: 1 } },
       });
-    for (const name of ['galal_access_token', 'galal_refresh_token'])
+    for (const name of ['crowd_access_token', 'crowd_refresh_token'])
       res.clearCookie(name, { path: '/api', httpOnly: true, secure: production, sameSite: 'lax' });
     res.json({ message: 'Signed out' });
   }),
@@ -446,7 +446,7 @@ api.post(
       fee = zone.fee;
     }
     const discount = input.promoCode ? await validatePromo(input.promoCode, subtotal) : 0;
-    const payload = readToken(req.cookies.galal_access_token, 'access');
+    const payload = readToken(req.cookies.crowd_access_token, 'access');
     const user = payload
       ? await db.user.findFirst({ where: { id: payload.sub, sessionVersion: payload.version } })
       : null;

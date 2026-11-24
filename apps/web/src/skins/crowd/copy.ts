@@ -1,4 +1,4 @@
-// Crowd's wording. These replace the Galal defaults in i18n.ts, and add the keys the Crowd home page uses.
+// Crowd's wording. These replace the crowd defaults in i18n.ts, and add the keys the Crowd home page uses.
 export const copy: { en: Record<string, string>; ar: Record<string, string> } = {
   en: {
     // Crowd home page
@@ -31,7 +31,7 @@ export const copy: { en: Record<string, string>; ar: Record<string, string> } = 
     crMenuCta: 'See the full menu',
     crFooterTag: 'Coffee · People · Connection',
     footerLine: 'Coffee · People · Connection.',
-    // site-wide wording that named Galal
+    // site-wide wording that named crowd
     heroEyebrow: 'CROWD',
     heroText: 'Speciality coffee, baked goods and good company. Pull a chair.',
     heroCaption: 'Crowd drinks and baked goods.',

@@ -11,12 +11,12 @@ const cloud = {
   CLOUDINARY_CLOUD_NAME: 'test-cloud',
   CLOUDINARY_API_KEY: 'test-key',
   CLOUDINARY_API_SECRET: 'test-secret',
-  CLOUDINARY_UPLOAD_PRESET: 'galal-products',
+  CLOUDINARY_UPLOAD_PRESET: 'crowd-products',
 };
 afterEach(() => vi.resetAllMocks());
 describe('image storage', () => {
   it('persists local bytes under a unique public URL', async () => {
-    const directory = await mkdtemp(resolve(tmpdir(), 'galal-upload-test-'));
+    const directory = await mkdtemp(resolve(tmpdir(), 'crowd-upload-test-'));
     const bytes = Buffer.from('already-optimized-image');
     const url = await createImageStorage({}, directory)(bytes);
     expect(url).toMatch(/^\/uploads\/[a-f\d-]{36}\.webp$/);
@@ -40,11 +40,11 @@ describe('image storage', () => {
         cloud_name: 'test-cloud',
         api_key: 'test-key',
         api_secret: 'test-secret',
-        upload_preset: 'galal-products',
+        upload_preset: 'crowd-products',
         secure: true,
         resource_type: 'image',
         type: 'upload',
-        public_id: expect.stringMatching(/^galal\/products\/[a-f\d-]{36}$/),
+        public_id: expect.stringMatching(/^crowd\/products\/[a-f\d-]{36}$/),
         allowed_formats: ['webp'],
         overwrite: false,
         timeout: 20000,

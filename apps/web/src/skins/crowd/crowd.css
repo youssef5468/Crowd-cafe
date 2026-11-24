@@ -764,7 +764,7 @@ html[data-skin='crowd'] .row-sticker {
   transform: rotate(3deg);
 }
 
-/* Colours that styles.css fixes for Galal's green */
+/* Colours that styles.css fixes for the default theme */
 html[data-skin='crowd'] .product-modal-photo,
 html[data-skin='crowd'] .hero-image,
 html[data-skin='crowd'] .product-art {

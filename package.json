@@ -11,10 +11,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently -k -n api,web \"npm run dev -w @galal/api\" \"npm run dev -w @galal/web\"",
-    "build": "npm run build -w @galal/shared && npm run build -w @galal/api && npm run build -w @galal/web",
+    "dev": "concurrently -k -n api,web \"npm run dev -w @crowd/api\" \"npm run dev -w @crowd/web\"",
+    "build": "npm run build -w @crowd/shared && npm run build -w @crowd/api && npm run build -w @crowd/web",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run build -w @galal/shared && vitest run",
+    "test": "npm run build -w @crowd/shared && vitest run",
     "db:local": "node scripts/local-postgres.mjs",
     "db:generate": "prisma generate --schema apps/api/prisma/schema.prisma",
     "db:push": "prisma db push --schema apps/api/prisma/schema.prisma",

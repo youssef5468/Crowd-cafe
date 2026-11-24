@@ -27,8 +27,8 @@ describe('pickup codes', () => {
     expect(parsePickupCode('K7M2Q9')).toBe('K7M2Q9');
     expect(parsePickupCode('  k7m 2q9 ')).toBe('K7M2Q9');
     expect(parsePickupCode('k7m-2q9')).toBe('K7M2Q9');
-    expect(parsePickupCode('https://galal.example/cashier?code=K7M2Q9')).toBe('K7M2Q9');
-    expect(parsePickupCode('https://galal.example/cashier?code=k7m2q9&x=1')).toBe('K7M2Q9');
+    expect(parsePickupCode('https://crowd.example/cashier?code=K7M2Q9')).toBe('K7M2Q9');
+    expect(parsePickupCode('https://crowd.example/cashier?code=k7m2q9&x=1')).toBe('K7M2Q9');
   });
   it('rejects anything that is not a code', () => {
     for (const bad of [
@@ -37,7 +37,7 @@ describe('pickup codes', () => {
       'K7M2Q9X',
       'K7M2Q0',
       'K7M2QI',
-      'https://galal.example/menu',
+      'https://crowd.example/menu',
       '<script>',
     ])
       expect(parsePickupCode(bad)).toBeNull();

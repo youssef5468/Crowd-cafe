@@ -264,10 +264,10 @@ export const defaultSettings: Settings = {
   ramadanMode: false,
   arabicNumerals: false,
   whatsappEnabled: false,
-  facebook: 'https://www.facebook.com/Galalcoffee1/',
+  facebook: 'https://www.facebook.com/crowdcoffee1/',
   instagram: '',
-  about_en: 'Coffee, cold drinks, chocolate and a breakfast bite. Welcome to Galal Coffee.',
-  about_ar: 'قهوة ومشروبات باردة وشوكولاتة وفطار. أهلاً بيك في جلال كوفي.',
+  about_en: 'Coffee, cold drinks, chocolate and a breakfast bite. Welcome to Crowd Coffee.',
+  about_ar: 'قهوة ومشروبات باردة وشوكولاتة وفطار. أهلاً بيك في Crowd.',
   theme: {},
 };
 export { cairoDate, isOpen } from './runtime.js';
@@ -285,8 +285,8 @@ export const seedItems: MenuItem[] = [
     categoryId: 'coffee',
     image: '/assets/hot-coffee.webp',
     temperature: 'hot',
-    description_en: 'A Galal cup, served hot.',
-    description_ar: 'كوباية جلال، سخنة.',
+    description_en: 'A Crowd cup, served hot.',
+    description_ar: 'كوباية Crowd، سخنة.',
   },
   {
     id: 'iced-coffee',
@@ -295,8 +295,8 @@ export const seedItems: MenuItem[] = [
     categoryId: 'cold',
     image: '/assets/iced-pair.webp',
     temperature: 'cold',
-    description_en: 'Coffee on ice, in a Galal cup.',
-    description_ar: 'قهوة على تلج، في كوباية جلال.',
+    description_en: 'Coffee on ice, in a Crowd cup.',
+    description_ar: 'قهوة على تلج، في كوباية Crowd.',
   },
   {
     id: 'choco-marshmallow',
@@ -315,8 +315,8 @@ export const seedItems: MenuItem[] = [
     categoryId: 'chocolate',
     image: '/assets/choco-popcorn.webp',
     temperature: 'hot',
-    description_en: 'The chocolate drink shown in our Galal collection.',
-    description_ar: 'مشروب الشوكولاتة من مجموعة جلال.',
+    description_en: 'The chocolate drink shown in our Crowd collection.',
+    description_ar: 'مشروب الشوكولاتة من مجموعة Crowd.',
   },
   {
     id: 'breakfast',
@@ -392,7 +392,7 @@ export function personTotals(
 }
 
 // ---- Crowd Speciality Coffee: starter catalog (names and photos from the brand's own posts) ------
-// Prices are not known yet, so every item starts unconfirmed and unavailable, exactly like Galal's.
+// Prices are not known yet, so every item starts unconfirmed and unavailable, exactly like crowd's.
 export const crowdCategories: Category[] = [
   { id: 'frappes', name_en: 'Frappes', name_ar: 'فرابيه', sort: 0 },
   { id: 'coffee', name_en: 'Coffee', name_ar: 'قهوة', sort: 1 },

@@ -6,7 +6,7 @@ import { runtimeConfig } from '../apps/api/src/runtime-config';
 import { PostgresRateLimitStore } from '../apps/api/src/rate-limit-store';
 import { db } from '../apps/api/src/db';
 import { app } from '../apps/api/src/app';
-import { registerSchema } from '@galal/shared';
+import { registerSchema } from '@crowd/shared';
 
 const production = {
   NODE_ENV: 'production',
@@ -73,12 +73,12 @@ describe('production safeguards', () => {
       .expect(403);
     await request(app)
       .post('/api/auth/logout')
-      .set('Cookie', 'galal_access_token=invalid')
+      .set('Cookie', 'crowd_access_token=invalid')
       .expect(403);
     await request(app)
       .post('/api/auth/logout')
-      .set('Cookie', 'galal_access_token=invalid')
-      .set('X-Galal-CSRF', '1')
+      .set('Cookie', 'crowd_access_token=invalid')
+      .set('X-crowd-CSRF', '1')
       .expect(200);
   });
   it('prevents bcrypt truncating new passwords, including multibyte text', () => {

@@ -1,34 +1,67 @@
-Reusable English/Arabic café ordering and operations website for Crowd Speciality Coffee. React 19 + TypeScript + Vite frontend, Express + Prisma + PostgreSQL API, shared Zod schemas, and persistent dine-in table ordering, split-bill groups, cashier scan, barista KDS, account, and admin flows.
+# Crowd Speciality Coffee
 
-## Run locally
+Reusable English/Arabic café ordering and operations website for Crowd Speciality Coffee. React 18 + TypeScript + Vite frontend, Express + Prisma + PostgreSQL API, shared Zod schemas, and persistent dine-in table ordering, split-bill groups, cashier scan, barista KDS, account, and admin flows.
 
-For the selected Vercel/Neon/Cloudinary deployment, see [VERCEL-SETUP.md](VERCEL-SETUP.md). Production preparation and local testing do not publish the website.
+## Run locally (from a fresh GitHub clone)
 
-Use Node.js 24 LTS or later and npm. This checkout was verified with Node 24 on Windows.
+> For production deployment (Vercel / Neon / Cloudinary), see [VERCEL-SETUP.md](VERCEL-SETUP.md). Local setup and testing do not publish anything publicly.
+
+### Prerequisites
+
+- **Node.js 24 LTS or later** and **npm** (verified with Node `v24.14.0` on Windows).
+- **Git** to clone the repository.
+- *(Optional)* **Docker Desktop** if you prefer Docker over the built-in local PostgreSQL.
+
+### 1. Clone and install
 
 ```bash
+git clone <YOUR_GITHUB_REPO_URL>
+cd Crowd-cafe
 npm ci
 npm run db:generate
-npm run build -w @galal/shared
+npm run build -w @crowd/shared
 ```
 
-Choose one PostgreSQL setup:
+> **Note:** Always run `npm run build -w @crowd/shared` after a fresh clone (or after editing `packages/shared`) so `@crowd/api` and `@crowd/web` can resolve the compiled shared package.
 
-Without Docker, run the included development-only real PostgreSQL runtime in its own terminal:
+### 2. Start PostgreSQL
+
+Choose **one** of the following two options:
+
+#### Option A — Built-in local PostgreSQL (No Docker required, recommended)
+
+Run this in **its own terminal** and keep it running while you develop:
 
 ```bash
 npm run db:local
 ```
 
-It binds to `127.0.0.1:54340`, persists under ignored `.local/`, creates a UTF-8 database (`crowd_utf8`), and generates random credentials in ignored `.env` on first run. Stop it with Ctrl+C. It does not install a system service. Do not use it for production. The first run downloads the platform PostgreSQL npm package through `npm ci`.
+What it does automatically on first run:
+- Starts an isolated development-only PostgreSQL instance bound to `127.0.0.1:54340`.
+- Persists data locally under `.local/` (git-ignored).
+- Creates the UTF-8 database (`crowd_utf8`).
+- Generates random local credentials and creates `.env` (git-ignored) if one does not exist.
 
-With Docker, copy `.env.example` to `.env`, set `POSTGRES_PASSWORD`, update `DATABASE_URL` to use the same password and port `54340`, and set a random `JWT_SECRET` (32+ characters), `SEED_ADMIN_EMAIL`, and `SEED_ADMIN_PASSWORD` (12+ characters):
+Stop it anytime with `Ctrl+C`. Do **not** use `db:local` in production.
 
-```bash
-docker compose up -d
-```
+#### Option B — Docker Compose
 
-Once PostgreSQL is ready:
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Edit `.env` and set:
+   - `POSTGRES_PASSWORD` and matching password in `DATABASE_URL` (port `54340`)
+   - `JWT_SECRET` (random string, 32+ characters)
+   - `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD` (12+ characters)
+3. Start the database container:
+   ```bash
+   docker compose up -d
+   ```
+
+### 3. Migrate, seed, and run the app
+
+In a **second terminal** (while PostgreSQL is running):
 
 ```bash
 npm run db:deploy
@@ -36,9 +69,24 @@ npm run db:seed
 npm run dev
 ```
 
-Visit [the local website](http://127.0.0.1:5184/). API: http://127.0.0.1:4011/api/menu. The seed is idempotent and preserves existing records.
+This starts both servers concurrently:
+- **Frontend (Web):** http://127.0.0.1:5184/ (or http://localhost:5184/)
+- **Backend (API):** http://127.0.0.1:4011/api/menu (health check: http://127.0.0.1:4011/api/health)
 
-Sign in at `/account` using `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD` from your ignored `.env`, then open `/admin`. The local setup generates a random owner password; it is never printed or committed. There is no public shared demo password. Register a customer account, then use Team access as owner to grant staff access.
+### 4. First-time Owner Sign-in
+
+1. Open your `.env` file and copy `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD`.
+2. Go to http://127.0.0.1:5184/account and sign in.
+3. Open `/admin` to add a **Branch**, set item **Prices**, and mark items as **Available** & **Price Confirmed**.
+
+> The seed script (`npm run db:seed`) is idempotent and preserves existing records and passwords. To register a staff member, create a normal customer account at `/account` and promote them under **Team access** in `/admin`.
+
+### Troubleshooting
+
+- **Cannot connect to database / `P1001`:** Make sure `npm run db:local` (or `docker compose up -d`) is running in another terminal on port `54340`.
+- **Module not found `@crowd/shared`:** Run `npm run build -w @crowd/shared`.
+- **Prisma client not found:** Run `npm run db:generate`.
+- **Port already in use (`5184`, `4011`, `54340`):** Stop any previous dev server or PostgreSQL instance using those ports.
 
 ## What works
 

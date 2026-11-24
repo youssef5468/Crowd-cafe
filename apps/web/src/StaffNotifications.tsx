@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Bell } from '@phosphor-icons/react';
-import type { OrderRecord, ReservationRecord } from '@galal/shared';
+import type { OrderRecord, ReservationRecord } from '@crowd/shared';
 import { useCafe } from './context';
 import { useUI } from './lib';
 

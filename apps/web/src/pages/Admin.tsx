@@ -18,8 +18,8 @@ import {
   type User,
   type OrderStatus,
   seedBranch,
-} from '@galal/shared';
-import { hasBranchLocation } from '@galal/shared/runtime';
+} from '@crowd/shared';
+import { hasBranchLocation } from '@crowd/shared/runtime';
 import { api, queryClient, text, useUI } from '../lib';
 import { useCafe, useUser } from '../context';
 import { PageHeading, FormError, Modal } from '../components';

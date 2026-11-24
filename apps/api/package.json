@@ -1,5 +1,5 @@
 {
-  "name": "@galal/api",
+  "name": "@crowd/api",
   "private": true,
   "type": "module",
   "version": "1.0.0",
@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@galal/shared": "*",
+    "@crowd/shared": "*",
     "@prisma/client": "6.19.0",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.11.0",

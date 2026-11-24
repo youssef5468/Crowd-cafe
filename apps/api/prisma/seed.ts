@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
-import { categorySchema, itemSchema, branchSchema, settingsSchema } from '@galal/shared';
+import { categorySchema, itemSchema, branchSchema, settingsSchema } from '@crowd/shared';
 import {
   seedItems,
   seedCategories,
@@ -9,9 +9,9 @@ import {
   crowdItems,
   crowdCategories,
   crowdSettings,
-} from '@galal/shared';
-// Seeds the Crowd starter menu (set SEED_BRAND=galal to seed the Galal reference menu instead).
-const crowd = process.env.SEED_BRAND !== 'galal';
+} from '@crowd/shared';
+// Seeds the Crowd starter menu (set SEED_BRAND=starter to seed the generic starter menu instead).
+const crowd = process.env.SEED_BRAND !== 'starter';
 const catalog = {
   items: crowd ? crowdItems : seedItems,
   categories: crowd ? crowdCategories : seedCategories,
@@ -40,13 +40,13 @@ try {
     create: {
       email,
       password: await bcrypt.hash(password, 12),
-      name: crowd ? 'Crowd Owner' : 'Galal Coffee Owner',
+      name: 'Crowd Owner',
       role: 'owner',
     },
     update: {},
   });
   console.log(
-    `Seeded the ${crowd ? 'Crowd' : 'Galal'} reference collection with unconfirmed pricing and owner ${email}. Existing records and passwords preserved. New sites start in preview mode.`,
+    `Seeded the ${crowd ? 'Crowd' : 'starter'} reference collection with unconfirmed pricing and owner ${email}. Existing records and passwords preserved. New sites start in preview mode.`,
   );
 } finally {
   await db.$disconnect();

@@ -11,8 +11,8 @@ import {
   Phone,
   ArrowUpRight,
 } from '@phosphor-icons/react';
-import { type Branch } from '@galal/shared';
-import { hasBranchLocation, isOpen } from '@galal/shared/runtime';
+import { type Branch } from '@crowd/shared';
+import { hasBranchLocation, isOpen } from '@crowd/shared/runtime';
 import { ContactLinks } from '../ContactLinks';
 import { SelectInput } from '../SelectInput';
 import { useCafe } from '../context';

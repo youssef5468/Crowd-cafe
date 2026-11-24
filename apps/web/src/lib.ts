@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { QueryClient } from '@tanstack/react-query';
-import { type MenuItem, type MenuResponse } from '@galal/shared';
+import { type MenuItem, type MenuResponse } from '@crowd/shared';
 import i18n from './i18n';
 
 export const queryClient = new QueryClient({
@@ -18,7 +18,7 @@ export class ApiRequestError extends Error {
 export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers);
   if (init.method && !['GET', 'HEAD'].includes(init.method.toUpperCase()))
-    headers.set('X-Galal-CSRF', '1');
+    headers.set('X-crowd-CSRF', '1');
   if (init.body && !(init.body instanceof FormData))
     headers.set('Content-Type', 'application/json');
   let response = await fetch(`/api${path}`, { ...init, headers, credentials: 'include' });
@@ -26,7 +26,7 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
     const refresh = await fetch('/api/auth/refresh', {
       method: 'POST',
       credentials: 'include',
-      headers: { 'X-Galal-CSRF': '1' },
+      headers: { 'X-crowd-CSRF': '1' },
     });
     if (refresh.ok)
       response = await fetch(`/api${path}`, { ...init, headers, credentials: 'include' });

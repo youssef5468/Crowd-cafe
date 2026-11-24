@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query';
 import QRCode from 'qrcode';
 import { CheckCircle, Minus, Plus, Trash, X } from '@phosphor-icons/react';
-import { isCodeExpired, personTotals, type OrderRecord, type TableOrderInput } from '@galal/shared';
+import { isCodeExpired, personTotals, type OrderRecord, type TableOrderInput } from '@crowd/shared';
 import { useCafe } from '../context';
 import { api, text, unitPrice, useCart } from '../lib';
 import { useTable } from '../table';

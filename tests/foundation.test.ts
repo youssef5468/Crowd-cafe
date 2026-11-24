@@ -6,14 +6,14 @@ import {
   seedItems,
   orderSchema,
   defaultSettings,
-} from '@galal/shared';
-describe('Galal content and hours', () => {
+} from '@crowd/shared';
+describe('crowd content and hours', () => {
   it('keeps unverified prices and ordering unavailable without inheriting another brand', () => {
     expect(seedItems).toHaveLength(5);
     expect(
       seedItems.every((i) => i.name_en && i.name_ar && !i.priceConfirmed && !i.available),
     ).toBe(true);
-    expect(defaultSettings.facebook).toBe('https://www.facebook.com/Galalcoffee1/');
+    expect(defaultSettings.facebook).toBe('https://www.facebook.com/crowdcoffee1/');
     expect(defaultSettings.previewMode).toBe(true);
     expect(seedBranch.phone).toBe('');
   });

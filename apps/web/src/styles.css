@@ -255,7 +255,7 @@ main:focus {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
 }
-/* The shell stays in one coordinated theme. Green and cream come from Galal's supplied identity. */
+/* The shell stays in one coordinated theme. */
 .announcement {
   min-height: 35px;
   display: flex;

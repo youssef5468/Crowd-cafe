@@ -1,7 +1,7 @@
 import { createContext, useContext, type ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { type MenuResponse, type User } from '@galal/shared';
+import { type MenuResponse, type User } from '@crowd/shared';
 import { api, getMenu, money } from './lib';
 import { theme } from './theme.config';
 type Branding = {

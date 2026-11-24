@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Galal redesign layer (cream + green, awning, glass).
+   Crowd redesign layer (cream + green, awning, glass).
    Loaded after styles.css / home.css, so it only overrides presentation.
    All colours come from the theme tokens set by applyTheme(), so the admin
    theme editor and the dark theme keep working.
@@ -344,7 +344,7 @@ body {
   color: var(--primary);
   white-space: nowrap;
 }
-.hero2-galal span {
+.hero2-crowd span {
   display: inline-block;
 }
 .hero2-photo {

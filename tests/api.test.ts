@@ -14,8 +14,8 @@ if (process.env.NODE_ENV === 'production' || !process.env.DATABASE_URL?.includes
   throw new Error('Integration tests require a local development database');
 if (process.env.UPLOAD_STORAGE && process.env.UPLOAD_STORAGE !== 'local')
   throw new Error('Integration tests require UPLOAD_STORAGE=local to avoid creating cloud assets');
-const owner = request.agent(app).set('X-Galal-CSRF', '1');
-const customer = request.agent(app).set('X-Galal-CSRF', '1');
+const owner = request.agent(app).set('X-crowd-CSRF', '1');
+const customer = request.agent(app).set('X-crowd-CSRF', '1');
 const suffix = randomUUID();
 const fixtureItemId = `qa-espresso-${suffix}`;
 const fixtureBranchId = `qa-branch-${suffix}`;
@@ -46,7 +46,7 @@ const order = {
 };
 beforeAll(async () => {
   if (!process.env.DATABASE_URL?.includes(':54340/'))
-    throw new Error('Galal tests require the isolated database on port 54340');
+    throw new Error('crowd tests require the isolated database on port 54340');
   await db.category.create({
     data: { id: fixtureCategoryId, name_en: 'QA fixture', name_ar: 'اختبار', sort: 99 },
   });
@@ -77,7 +77,7 @@ beforeAll(async () => {
       id: fixtureBranchId,
       name_en: 'QA branch',
       name_ar: 'فرع اختبار',
-      address_en: 'Test location, not a Galal address',
+      address_en: 'Test location, not a crowd address',
       address_ar: 'عنوان اختبار',
       phone: '+201000000000',
       lat: 30,

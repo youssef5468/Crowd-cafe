@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Clock, ArrowUpRight } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
-import { isOpen } from '@galal/shared/runtime';
-import { seedBranch } from '@galal/shared';
+import { isOpen } from '@crowd/shared/runtime';
+import { seedBranch } from '@crowd/shared';
 import { brand } from './brand';
 export function Hours({ compact = false }: { compact?: boolean }) {
   const { t } = useTranslation();

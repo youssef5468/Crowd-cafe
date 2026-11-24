@@ -7,7 +7,7 @@ import { db } from '../apps/api/src/db';
 
 if (process.env.NODE_ENV === 'production' || !process.env.DATABASE_URL?.includes('127.0.0.1'))
   throw new Error('Integration tests require a local development database');
-const owner = request.agent(app).set('X-Galal-CSRF', '1');
+const owner = request.agent(app).set('X-crowd-CSRF', '1');
 const suffix = randomUUID();
 const itemId = `qa-dinein-${suffix}`;
 const categoryId = `qa-dinein-category-${suffix}`;
@@ -31,7 +31,7 @@ const place = async (overrides: Record<string, unknown> = {}) => {
 
 beforeAll(async () => {
   if (!process.env.DATABASE_URL?.includes(':54340/'))
-    throw new Error('Galal tests require the isolated database on port 54340');
+    throw new Error('crowd tests require the isolated database on port 54340');
   await db.category.create({
     data: { id: categoryId, name_en: 'QA dine-in', name_ar: 'اختبار', sort: 98 },
   });

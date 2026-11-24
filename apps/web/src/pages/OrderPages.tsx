@@ -15,8 +15,8 @@ import {
   type Zone,
   type ReservationInput,
   type ReservationRecord,
-} from '@galal/shared';
-import { hasBranchLocation } from '@galal/shared/runtime';
+} from '@crowd/shared';
+import { hasBranchLocation } from '@crowd/shared/runtime';
 import { useCafe, useUser } from '../context';
 import { api, text, useCart, unitPrice } from '../lib';
 import { Arrow, FormError, PageHeading, SuccessMark } from '../components';

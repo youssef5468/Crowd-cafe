@@ -1,4 +1,4 @@
-import type { MenuItem } from '@galal/shared';
+import type { MenuItem } from '@crowd/shared';
 
 // The three labels Crowd already uses on its posts.
 const labels = {

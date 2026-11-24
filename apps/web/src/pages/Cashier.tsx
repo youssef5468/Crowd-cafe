@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Camera, CheckCircle, Stop } from '@phosphor-icons/react';
-import { parsePickupCode, personTotals, type OrderRecord } from '@galal/shared';
+import { parsePickupCode, personTotals, type OrderRecord } from '@crowd/shared';
 import { useCafe } from '../context';
 import { ApiRequestError, api, text } from '../lib';
 import { StaffGate } from './StaffGate';

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { SpeakerHigh, SpeakerSlash } from '@phosphor-icons/react';
-import type { OrderRecord, OrderStatus } from '@galal/shared';
+import type { OrderRecord, OrderStatus } from '@crowd/shared';
 import { useCafe } from '../context';
 import { api, text, useUI } from '../lib';
 import { StaffGate } from './StaffGate';

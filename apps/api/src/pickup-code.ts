@@ -1,5 +1,5 @@
 import { randomInt } from 'node:crypto';
-import { PICKUP_CODE_ALPHABET, PICKUP_CODE_LENGTH } from '@galal/shared';
+import { PICKUP_CODE_ALPHABET, PICKUP_CODE_LENGTH } from '@crowd/shared';
 
 /** Random short code for a dine-in order, drawn from an alphabet with no look-alike characters. */
 export function newPickupCode(): string {
