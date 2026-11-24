@@ -1,0 +1,9 @@
+.env*
+!.env.example
+.local/
+uploads/
+screenshots/
+assets/generated-products/
+test-results/
+playwright-report/
+node_modules/

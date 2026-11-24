@@ -1,0 +1,183 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+model RateLimit {
+  key String @id
+  hits Int
+  resetAt DateTime
+  @@index([resetAt])
+  @@map("rate_limits")
+}
+model User {
+  id String @id @default(cuid())
+  name String
+  email String @unique
+  password String
+  role String @default("customer")
+  sessionVersion Int @default(0)
+  addresses Json @default("[]")
+  orders Order[]
+  createdAt DateTime @default(now())
+  @@map("users")
+}
+model Category {
+  id String @id
+  name_en String
+  name_ar String
+  sort Int @default(0)
+  items Item[]
+  @@map("categories")
+}
+model Item {
+  id String @id
+  name_en String
+  name_ar String
+  description_en String
+  description_ar String
+  categoryId String
+  category Category @relation(fields:[categoryId],references:[id])
+  image String?
+  available Boolean @default(true)
+  priceConfirmed Boolean @default(false)
+  featured Boolean @default(false)
+  temperature String @default("hot")
+  vegan Boolean @default(false)
+  caffeineFree Boolean @default(false)
+  variants Json
+  addons Json @default("[]")
+  @@map("items")
+}
+model Branch {
+  id String @id
+  name_en String
+  name_ar String
+  address_en String
+  address_ar String
+  phone String?
+  lat Float?
+  lng Float?
+  open String
+  close String
+  ramadanOpen String?
+  ramadanClose String?
+  @@map("branches")
+}
+model DeliveryZone {
+  id String @id
+  name_en String
+  name_ar String
+  fee Int
+  minimum Int
+  active Boolean @default(true)
+  @@map("delivery_zones")
+}
+model Order {
+  id String @id @default(cuid())
+  accessToken String @unique
+  userId String?
+  user User? @relation(fields:[userId],references:[id])
+  branchId String
+  zoneId String?
+  name String
+  phone String
+  fulfillment String
+  address String
+  notes String
+  payment String
+  promoCode String?
+  subtotal Int
+  fee Int
+  discount Int
+  total Int
+  status String @default("received")
+  demo Boolean @default(true)
+  tableNumber String?
+  pickupCode String? @unique
+  codeExpiresAt DateTime?
+  paidAt DateTime?
+  items OrderItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId,createdAt])
+  @@index([status,createdAt])
+  @@map("orders")
+}
+model OrderItem {
+  id String @id @default(cuid())
+  orderId String
+  order Order @relation(fields:[orderId],references:[id],onDelete:Cascade)
+  itemId String
+  name_en String
+  name_ar String
+  variant_en String
+  variant_ar String
+  quantity Int
+  unitPrice Int
+  notes String
+  person String @default("")
+  addons String[]
+  @@map("order_items")
+}
+model PromoCode {
+  id String @id
+  code String @unique
+  percent Int
+  minimum Int @default(0)
+  expiresAt DateTime?
+  active Boolean @default(true)
+  @@map("promo_codes")
+}
+model Reservation {
+  id String @id @default(cuid())
+  branchId String
+  name String
+  phone String
+  date String
+  time String
+  partySize Int
+  notes String
+  status String @default("pending")
+  demo Boolean @default(true)
+  createdAt DateTime @default(now())
+  @@map("reservations")
+}
+model Review {
+  id String @id @default(cuid())
+  name String
+  rating Int
+  text String
+  approved Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@map("reviews")
+}
+model Setting {
+  id String @id @default("site")
+  data Json
+  @@map("settings")
+}
+model Contact {
+  id String @id @default(cuid())
+  name String
+  email String
+  message String
+  createdAt DateTime @default(now())
+  @@map("contacts")
+}
+model Subscriber {
+  email String @id
+  createdAt DateTime @default(now())
+  @@map("subscribers")
+}
+model Event {
+  id String @id
+  name_en String
+  name_ar String
+  description_en String
+  description_ar String
+  date String
+  @@map("events")
+}

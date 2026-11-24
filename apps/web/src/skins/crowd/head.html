@@ -1,0 +1,211 @@
+<link rel="manifest" href="/manifest.crowd.webmanifest" />
+<meta name="theme-color" content="#F1F4E9" />
+<meta
+  name="description"
+  content="Crowd Speciality Coffee. Speciality coffee and baked goods, made for every Crowd. Coffee, people, connection."
+/>
+<meta property="og:title" content="Crowd | Speciality Coffee" />
+<meta property="og:description" content="Coffee, people, connection. That’s Crowd." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="/assets/crowd/photo-croissant-cup.webp" />
+<link rel="icon" type="image/webp" href="/assets/crowd/badge.webp" />
+<link rel="apple-touch-icon" href="/assets/crowd/icon-192.png" />
+<title>Crowd | Speciality Coffee</title>
+<link rel="preload" href="/assets/crowd/logo.webp" as="image" type="image/webp" />
+<link
+  rel="preload"
+  href="/assets/fonts/loader-crowd.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<style>
+  /* Loading screen: three cups fill up under the Crowd wordmark. Styled here so it paints first. */
+  @font-face {
+    font-family: 'Crowd Loader';
+    src: url('/assets/fonts/loader-crowd.woff2') format('woff2');
+    font-display: block;
+  }
+  #crowd-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: grid;
+    place-items: center;
+    background: #f1f4e9;
+    color: #121212;
+    transition:
+      opacity 0.45s ease,
+      visibility 0s 0.45s;
+    animation: cl-away 0.4s ease 14s forwards;
+  }
+  html[data-theme='dark'] #crowd-loader {
+    background: #121212;
+    color: #f1f4e9;
+  }
+  html[data-splash='off'] #crowd-loader {
+    display: none;
+  }
+  #crowd-loader.gl-done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  @keyframes cl-away {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  #crowd-loader .cl-stage {
+    --ink: #121212;
+    --dur: 1.7s;
+    width: min(78vw, 340px);
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    direction: ltr;
+  }
+  html[data-splash='quick'] #crowd-loader .cl-stage {
+    --dur: 0.8s;
+  }
+  html[data-theme='dark'] #crowd-loader .cl-stage {
+    --ink: #f1f4e9;
+  }
+  .cl-logo {
+    width: min(64vw, 260px);
+    height: auto;
+    animation: cl-pop calc(var(--dur) * 0.3) cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+  html[data-theme='dark'] .cl-logo {
+    filter: invert(1);
+  }
+  .cl-scribble {
+    width: min(64vw, 260px);
+    height: 14px;
+    margin-top: -4px;
+    fill: none;
+    stroke: #f1791e;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: cl-draw calc(var(--dur) * 0.35) ease calc(var(--dur) * 0.22) forwards;
+  }
+  .cl-cups {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .cl-cup {
+    width: 44px;
+    height: 72px;
+    overflow: visible;
+    opacity: 0;
+    animation: cl-up calc(var(--dur) * 0.3) cubic-bezier(0.3, 1.6, 0.5, 1) forwards;
+  }
+  .cl-a {
+    animation-delay: calc(var(--dur) * 0.2);
+  }
+  .cl-b {
+    animation-delay: calc(var(--dur) * 0.32);
+  }
+  .cl-c {
+    animation-delay: calc(var(--dur) * 0.44);
+  }
+  .cl-body {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 3;
+    stroke-linejoin: round;
+  }
+  .cl-lid {
+    fill: var(--ink);
+  }
+  .cl-straw {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .cl-liq {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    animation: cl-fill calc(var(--dur) * 0.4) ease forwards;
+  }
+  .cl-a .cl-liq {
+    fill: #9db83a;
+    animation-delay: calc(var(--dur) * 0.4);
+  }
+  .cl-b .cl-liq {
+    fill: #6e4535;
+    animation-delay: calc(var(--dur) * 0.52);
+  }
+  .cl-c .cl-liq {
+    fill: #e58a2e;
+    animation-delay: calc(var(--dur) * 0.64);
+  }
+  .cl-line {
+    margin: 6px 0 0;
+    padding: 2px 14px;
+    font-family: 'Crowd Loader', 'Londrina Solid', Impact, 'Arial Narrow', sans-serif;
+    font-size: 24px;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #121212;
+    background: #64c132;
+    border: 2.5px solid #121212;
+    box-shadow: 3px 3px 0 #121212;
+    transform: rotate(-2deg);
+    opacity: 0;
+    animation: cl-pop calc(var(--dur) * 0.3) ease calc(var(--dur) * 0.7) forwards;
+  }
+  @keyframes cl-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes cl-fill {
+    to {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes cl-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes cl-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.85) rotate(-3deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #crowd-loader .cl-logo,
+    #crowd-loader .cl-line,
+    #crowd-loader .cl-cup,
+    #crowd-loader .cl-liq,
+    #crowd-loader .cl-scribble {
+      animation: none;
+      opacity: 1;
+      transform: none;
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
+<noscript
+  ><style>
+    #crowd-loader {
+      display: none;
+    }
+  </style></noscript
+>

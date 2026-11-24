@@ -1,0 +1,1 @@
+ALTER TABLE "items" ADD COLUMN "priceConfirmed" BOOLEAN NOT NULL DEFAULT false;

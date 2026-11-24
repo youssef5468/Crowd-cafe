@@ -1,0 +1,3 @@
+{
+  "note": "The Galal catalog is defined by seedItems in packages/shared/src/index.ts. No old-brand catalog or prices are imported."
+}

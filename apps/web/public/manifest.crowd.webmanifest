@@ -1,0 +1,25 @@
+{
+  "id": "/crowd",
+  "name": "Crowd Speciality Coffee",
+  "short_name": "Crowd",
+  "description": "Coffee, people, connection. That's Crowd.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F1F4E9",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "/assets/crowd/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/crowd/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
